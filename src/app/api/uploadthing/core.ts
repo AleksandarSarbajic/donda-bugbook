@@ -12,45 +12,51 @@ export const fileRouter = {
   })
     .middleware(async () => {
       const { user } = await validateRequest();
+
       if (!user) throw new UploadThingError("Unauthorized");
 
       return { user };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       const oldAvatarUrl = metadata.user.avatarUrl;
+
       if (oldAvatarUrl) {
         const key = oldAvatarUrl.split(
           `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`,
         )[1];
+
         await new UTApi().deleteFiles(key);
       }
+
       const newAvatarUrl = file.url.replace(
         "/f/",
         `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/`,
       );
 
       await Promise.all([
-        await prisma.user.update({
+        prisma.user.update({
           where: { id: metadata.user.id },
-          data: { avatarUrl: newAvatarUrl },
+          data: {
+            avatarUrl: newAvatarUrl,
+          },
         }),
-        await streamServerClient.partialUpdateUser({
+        streamServerClient.partialUpdateUser({
           id: metadata.user.id,
           set: {
-            avatarUrl: newAvatarUrl,
+            image: newAvatarUrl,
           },
         }),
       ]);
 
       return { avatarUrl: newAvatarUrl };
     }),
-
   attachment: f({
     image: { maxFileSize: "4MB", maxFileCount: 5 },
     video: { maxFileSize: "64MB", maxFileCount: 5 },
   })
     .middleware(async () => {
       const { user } = await validateRequest();
+
       if (!user) throw new UploadThingError("Unauthorized");
 
       return {};
@@ -65,6 +71,7 @@ export const fileRouter = {
           type: file.type.startsWith("image") ? "IMAGE" : "VIDEO",
         },
       });
+
       return { mediaId: media.id };
     }),
 } satisfies FileRouter;
