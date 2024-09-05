@@ -21,7 +21,10 @@ interface NewChatDialogProps {
   onChatCreated: () => void;
 }
 
-function NewChatDialog({ onOpenChange, onChatCreated }: NewChatDialogProps) {
+export default function ChatDialog({
+  onOpenChange,
+  onChatCreated,
+}: NewChatDialogProps) {
   const { client, setActiveChannel } = useChatContext();
 
   const { toast } = useToast();
@@ -200,5 +203,3 @@ function SelectedUserTag({ user, onRemove }: SelectedUserTagProps) {
     </button>
   );
 }
-
-export default NewChatDialog;
