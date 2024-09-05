@@ -1,8 +1,6 @@
-import { validateRequest } from "@/auth";
 import FollowButton from "@/components/FollowButton";
 import FollowerCount from "@/components/FollowerCount";
-import TrendsSidebar from "@/components/TrendsSidebar";
-import { Button } from "@/components/ui/button";
+
 import UserAvatar from "@/components/UserAvatar";
 import prisma from "@/lib/prisma";
 import { FollowerInfo, getUserDataSelect, UserData } from "@/lib/types";
@@ -14,6 +12,7 @@ import { cache } from "react";
 import UserPosts from "./UserPosts";
 import Linkify from "@/components/Linkify";
 import EditProfileButton from "./EditProfileButton";
+import { validateRequest } from "@/auth";
 
 interface PageProps {
   params: { username: string };
