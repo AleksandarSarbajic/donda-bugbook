@@ -12,7 +12,7 @@ interface SearchResultsProps {
   query: string;
 }
 
-export default function SearchResults({ query }: SearchResultsProps) {
+export default function SearchResultsPosts({ query }: SearchResultsProps) {
   const {
     data,
     fetchNextPage,
@@ -24,7 +24,7 @@ export default function SearchResults({ query }: SearchResultsProps) {
     queryKey: ["post-feed", "search", query],
     queryFn: ({ pageParam }) =>
       kyInstance
-        .get("/api/search", {
+        .get("/api/search/posts", {
           searchParams: {
             q: query,
             ...(pageParam ? { cursor: pageParam } : {}),
@@ -63,6 +63,7 @@ export default function SearchResults({ query }: SearchResultsProps) {
       className="space-y-5"
       onBottomReached={() => hasNextPage && !isFetching && fetchNextPage()}
     >
+      <h2 className="text-2xl font-bold">Posts</h2>
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}

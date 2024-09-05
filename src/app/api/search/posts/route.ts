@@ -23,25 +23,29 @@ export async function GET(req: NextRequest) {
         OR: [
           {
             content: {
-              search: searchQuery,
+              contains: searchQuery,
+              mode: "insensitive",
             },
           },
           {
             user: {
               displayName: {
-                search: searchQuery,
+                contains: searchQuery,
+                mode: "insensitive",
               },
             },
           },
           {
             user: {
               username: {
-                search: searchQuery,
+                contains: searchQuery,
+                mode: "insensitive",
               },
             },
           },
         ],
       },
+
       include: getPostDataInclude(user.id),
       orderBy: { createdAt: "desc" },
       take: pageSize + 1,

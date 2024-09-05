@@ -16,6 +16,7 @@ export function getUserDataSelect(loggedInUserId: string) {
         followerId: true,
       },
     },
+
     _count: {
       select: {
         posts: true,
@@ -111,6 +112,10 @@ export interface FollowerInfo {
 export type UserData = Prisma.UserGetPayload<{
   select: ReturnType<typeof getUserDataSelect>;
 }>;
+
+export interface UsersData {
+  users: UserData[];
+}
 
 export interface LikeInfo {
   likes: number;

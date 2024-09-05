@@ -24,6 +24,7 @@ export default function FollowButton({
 
   const queryKey: QueryKey = ["follower-info", userId];
 
+  // console.log(data, "data");
   const { mutate } = useMutation({
     mutationFn: () =>
       data.isFollowedByUser

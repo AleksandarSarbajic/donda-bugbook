@@ -1,3 +1,4 @@
+import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
 import { getUserDataSelect } from "@/lib/types";
 import { formatNumber } from "@/lib/utils";
@@ -8,7 +9,6 @@ import { Suspense } from "react";
 import FollowButton from "./FollowButton";
 import UserAvatar from "./UserAvatar";
 import UserTooltip from "./UserTooltip";
-import { validateRequest } from "@/auth";
 
 export default function TrendsSidebar() {
   return (
