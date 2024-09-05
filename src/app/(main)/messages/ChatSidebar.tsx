@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { MailPlus, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCallback, useEffect, useState } from "react";
-import NewChatDialog from "./NewChatDialog";
+// import NewChatDialog from "./NewChatDialog";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface ChatSidebarProps {
@@ -95,7 +95,7 @@ function MenuHeader({ onClose }: MenuHeaderProps) {
           <MailPlus className="size-5" />
         </Button>
       </div>
-      {showNewChatDialog && (
+      {/* {showNewChatDialog && (
         <NewChatDialog
           onOpenChange={setShowNewChatDialog}
           onChatCreated={() => {
@@ -103,7 +103,7 @@ function MenuHeader({ onClose }: MenuHeaderProps) {
             onClose();
           }}
         />
-      )}
+      )} */}
     </>
   );
 }
