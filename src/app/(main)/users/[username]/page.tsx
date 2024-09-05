@@ -1,6 +1,8 @@
+import { validateRequest } from "@/auth";
 import FollowButton from "@/components/FollowButton";
 import FollowerCount from "@/components/FollowerCount";
-
+import Linkify from "@/components/Linkify";
+import TrendsSidebar from "@/components/TrendsSidebar";
 import UserAvatar from "@/components/UserAvatar";
 import prisma from "@/lib/prisma";
 import { FollowerInfo, getUserDataSelect, UserData } from "@/lib/types";
@@ -9,20 +11,26 @@ import { formatDate } from "date-fns";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
-import UserPosts from "./UserPosts";
-import Linkify from "@/components/Linkify";
 import EditProfileButton from "./EditProfileButton";
-import { validateRequest } from "@/auth";
+import UserPosts from "./UserPosts";
 
 interface PageProps {
   params: { username: string };
 }
+
 const getUser = cache(async (username: string, loggedInUserId: string) => {
   const user = await prisma.user.findFirst({
-    where: { username: { equals: username, mode: "insensitive" } },
+    where: {
+      username: {
+        equals: username,
+        mode: "insensitive",
+      },
+    },
     select: getUserDataSelect(loggedInUserId),
   });
+
   if (!user) notFound();
+
   return user;
 });
 
@@ -43,26 +51,28 @@ export async function generateMetadata({
 export default async function Page({ params: { username } }: PageProps) {
   const { user: loggedInUser } = await validateRequest();
 
-  if (!loggedInUser)
+  if (!loggedInUser) {
     return (
       <p className="text-destructive">
-        You are not authoruzied to view this page
+        You&apos;re not authorized to view this page.
       </p>
     );
+  }
+
   const user = await getUser(username, loggedInUser.id);
 
   return (
-    <main className="flex- w-full min-w-0 gap-5">
+    <main className="flex w-full min-w-0 gap-5">
       <div className="w-full min-w-0 space-y-5">
         <UserProfile user={user} loggedInUserId={loggedInUser.id} />
-        <div className="rounded-2x1 bg-card p-5 shadow-sm">
-          <h2 className="text-2x1 text-center font-bold">
+        <div className="rounded-2xl bg-card p-5 shadow-sm">
+          <h2 className="text-center text-2xl font-bold">
             {user.displayName}&apos;s posts
           </h2>
         </div>
         <UserPosts userId={user.id} />
       </div>
-      {/* <TrendsSidebar /> */}
+      <TrendsSidebar />
     </main>
   );
 }
@@ -79,6 +89,7 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
       ({ followerId }) => followerId === loggedInUserId,
     ),
   };
+
   return (
     <div className="h-fit w-full space-y-5 rounded-2xl bg-card p-5 shadow-sm">
       <UserAvatar
@@ -106,10 +117,7 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
         {user.id === loggedInUserId ? (
           <EditProfileButton user={user} />
         ) : (
-          <FollowButton
-            userId={user.id}
-            initialState={followerInfo}
-          ></FollowButton>
+          <FollowButton userId={user.id} initialState={followerInfo} />
         )}
       </div>
       {user.bio && (

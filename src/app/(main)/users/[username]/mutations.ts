@@ -1,4 +1,5 @@
 import { useToast } from "@/components/ui/use-toast";
+import { PostsPage } from "@/lib/types";
 import { useUploadThing } from "@/lib/uploadthing";
 import { UpdateUserProfileValues } from "@/lib/validation";
 import {
@@ -7,16 +8,18 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-
-import { UpdateUserProfile } from "./actions";
-import { PostsPage } from "@/lib/types";
 import { useRouter } from "next/navigation";
+import { updateUserProfile } from "./actions";
 
 export function useUpdateProfileMutation() {
   const { toast } = useToast();
+
   const router = useRouter();
+
   const queryClient = useQueryClient();
+
   const { startUpload: startAvatarUpload } = useUploadThing("avatar");
+
   const mutation = useMutation({
     mutationFn: async ({
       values,
@@ -26,20 +29,24 @@ export function useUpdateProfileMutation() {
       avatar?: File;
     }) => {
       return Promise.all([
-        UpdateUserProfile(values),
+        updateUserProfile(values),
         avatar && startAvatarUpload([avatar]),
       ]);
     },
     onSuccess: async ([updatedUser, uploadResult]) => {
       const newAvatarUrl = uploadResult?.[0].serverData.avatarUrl;
+
       const queryFilter: QueryFilters = {
         queryKey: ["post-feed"],
       };
+
       await queryClient.cancelQueries(queryFilter);
+
       queryClient.setQueriesData<InfiniteData<PostsPage, string | null>>(
         queryFilter,
         (oldData) => {
           if (!oldData) return;
+
           return {
             pageParams: oldData.pageParams,
             pages: oldData.pages.map((page) => ({
@@ -60,16 +67,21 @@ export function useUpdateProfileMutation() {
           };
         },
       );
+
       router.refresh();
-      toast({ description: "Profile updated" });
+
+      toast({
+        description: "Profile updated",
+      });
     },
     onError(error) {
       console.error(error);
       toast({
         variant: "destructive",
-        description: "Failed to update profile. Please Try again!",
+        description: "Failed to update profile. Please try again.",
       });
     },
   });
+
   return mutation;
 }

@@ -3,11 +3,8 @@ import Chat from "./Chat";
 
 export const metadata: Metadata = {
   title: "Messages",
-  description: "Messages",
 };
 
-function page() {
+export default function Page() {
   return <Chat />;
 }
-
-export default page;

@@ -9,9 +9,11 @@ import {
   UpdateUserProfileValues,
 } from "@/lib/validation";
 
-export async function UpdateUserProfile(values: UpdateUserProfileValues) {
+export async function updateUserProfile(values: UpdateUserProfileValues) {
   const validatedValues = updateUserProfileSchema.parse(values);
+
   const { user } = await validateRequest();
+
   if (!user) throw new Error("Unauthorized");
 
   const updatedUser = await prisma.$transaction(async (tx) => {
