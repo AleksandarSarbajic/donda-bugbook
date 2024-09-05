@@ -1,20 +1,20 @@
-import LoadingButton from "@/components/LoadingButton";
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
 } from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/use-toast";
-import UserAvatar from "@/components/UserAvatar";
-import useDebounce from "@/hooks/useDebounce";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { Check, Loader2, SearchIcon, X } from "lucide-react";
-import { useState } from "react";
-import { UserResponse } from "stream-chat";
+import { DialogTitle } from "@radix-ui/react-dialog";
 import { DefaultStreamChatGenerics, useChatContext } from "stream-chat-react";
 import { useSession } from "../SessionProvider";
+import { useState } from "react";
+import useDebounce from "@/hooks/useDebounce";
+import { UserResponse } from "stream-chat";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { Check, Loader2, SearchIcon, X } from "lucide-react";
+import UserAvatar from "@/components/UserAvatar";
+import LoadingButton from "@/components/LoadingButton";
 
 interface NewChatDialogProps {
   onOpenChange: (open: boolean) => void;
@@ -77,11 +77,12 @@ export default function NewChatDialog({
       setActiveChannel(channel);
       onChatCreated();
     },
-    onError(error) {
-      console.error("Error starting chat", error);
+    onError: (error) => {
+      console.error("Error creating chat", error);
       toast({
         variant: "destructive",
-        description: "Error starting chat. Please try again.",
+        description:
+          "An error occurred while creating the chat. Please try again.",
       });
     },
   });
@@ -94,7 +95,7 @@ export default function NewChatDialog({
         </DialogHeader>
         <div>
           <div className="group relative">
-            <SearchIcon className="absolute left-5 top-1/2 size-5 -translate-y-1/2 transform text-muted-foreground group-focus-within:text-primary" />
+            <SearchIcon className="absolute left-5 top-1/2 size-5 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary" />
             <input
               placeholder="Search users..."
               className="h-12 w-full pe-4 ps-14 focus:outline-none"
@@ -108,11 +109,11 @@ export default function NewChatDialog({
                 <SelectedUserTag
                   key={user.id}
                   user={user}
-                  onRemove={() => {
+                  onRemove={() =>
                     setSelectedUsers((prev) =>
                       prev.filter((u) => u.id !== user.id),
-                    );
-                  }}
+                    )
+                  }
                 />
               ))}
             </div>
@@ -135,7 +136,7 @@ export default function NewChatDialog({
                 />
               ))}
             {isSuccess && !data.users.length && (
-              <p className="my-3 text-center text-muted-foreground">
+              <p className="py-3 text-center">
                 No users found. Try a different name.
               </p>
             )}
@@ -153,7 +154,7 @@ export default function NewChatDialog({
             loading={mutation.isPending}
             onClick={() => mutation.mutate()}
           >
-            Start chat
+            Start Chat
           </LoadingButton>
         </DialogFooter>
       </DialogContent>
@@ -170,8 +171,8 @@ interface UserResultProps {
 function UserResult({ user, selected, onClick }: UserResultProps) {
   return (
     <button
-      className="flex w-full items-center justify-between px-4 py-2.5 transition-colors hover:bg-muted/50"
       onClick={onClick}
+      className="flex w-full items-center justify-between px-4 py-2.5 transition-colors hover:bg-muted/50"
     >
       <div className="flex items-center gap-2">
         <UserAvatar avatarUrl={user.image} />
@@ -193,8 +194,8 @@ interface SelectedUserTagProps {
 function SelectedUserTag({ user, onRemove }: SelectedUserTagProps) {
   return (
     <button
-      onClick={onRemove}
       className="flex items-center gap-2 rounded-full border p-1 hover:bg-muted/50"
+      onClick={onRemove}
     >
       <UserAvatar avatarUrl={user.image} size={24} />
       <p className="font-bold">{user.name}</p>
