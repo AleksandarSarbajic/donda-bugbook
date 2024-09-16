@@ -27,6 +27,7 @@ export async function GET(
         _count: {
           select: {
             followers: true,
+            following: true,
           },
         },
       },
@@ -39,6 +40,7 @@ export async function GET(
     const data: FollowerInfo = {
       followers: user._count.followers,
       isFollowedByUser: !!user.followers.length,
+      following: user._count.following,
     };
 
     return Response.json(data);

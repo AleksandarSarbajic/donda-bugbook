@@ -66,6 +66,7 @@ async function WhoToFollow() {
             userId={user.id}
             initialState={{
               followers: user._count.followers,
+              following: user._count.following,
               isFollowedByUser: user.followers.some(
                 ({ followerId }) => followerId === user.id,
               ),
@@ -100,6 +101,8 @@ const getTrendingTopics = unstable_cache(
 
 async function TrendingTopics() {
   const trendingTopics = await getTrendingTopics();
+
+  if (!trendingTopics.length) return null;
 
   return (
     <div className="space-y-5 rounded-2xl bg-card p-5 shadow-sm">

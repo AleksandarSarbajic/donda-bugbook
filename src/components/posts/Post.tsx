@@ -71,6 +71,7 @@ export default function Post({ post }: PostProps) {
           initialState={{
             likes: post._count.likes,
             isLikedByUser: post.likes.some((like) => like.userId === user.id),
+            users: post.likes.map((like) => like.userId),
           }}
         />
         <CommentButton

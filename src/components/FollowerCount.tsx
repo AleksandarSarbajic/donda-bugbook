@@ -12,10 +12,19 @@ function FollowerCount({ userId, initialState }: FollowerCountProps) {
   const { data } = useFollowerInfo(userId, initialState);
 
   return (
-    <span>
-      Followers:{" "}
-      <span className="font-semibold">{formatNumber(data.followers)}</span>
-    </span>
+    <div>
+      <span>
+        Followers:{" "}
+        <span className="font-semibold">{formatNumber(data.followers)}</span>
+      </span>
+      {" • "}
+      <span>
+        Following:{" "}
+        <span className="font-semibold">
+          {formatNumber(data.following ?? 0)}
+        </span>
+      </span>
+    </div>
   );
 }
 

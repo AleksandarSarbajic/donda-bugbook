@@ -21,6 +21,7 @@ export function getUserDataSelect(loggedInUserId: string) {
       select: {
         posts: true,
         followers: true,
+        following: true,
       },
     },
   } satisfies Prisma.UserSelect;
@@ -33,9 +34,6 @@ export function getPostDataInclude(loggedInUserId: string) {
     },
     attachments: true,
     likes: {
-      where: {
-        userId: loggedInUserId,
-      },
       select: {
         userId: true,
       },
@@ -106,6 +104,7 @@ export interface NotificationsPage {
 
 export interface FollowerInfo {
   followers: number;
+  following?: number;
   isFollowedByUser: boolean;
 }
 
@@ -117,9 +116,14 @@ export interface UsersData {
   users: UserData[];
 }
 
+export interface UsersPage {
+  users: UserData[];
+  nextCursor: string | null;
+}
 export interface LikeInfo {
   likes: number;
   isLikedByUser: boolean;
+  users?: string[];
 }
 
 export interface BookmarkInfo {
@@ -132,4 +136,9 @@ export interface NotificationCountInfo {
 
 export interface MessageCountInfo {
   unreadCount: number;
+}
+
+export interface UserCountInfo {
+  userFollowing: UserData[];
+  userFollowers: UserData[];
 }

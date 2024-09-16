@@ -2,7 +2,8 @@ import TrendsSidebar from "@/components/TrendsSidebar";
 import { Metadata } from "next";
 
 import SearchResultsPosts from "./SearchResultsPosts";
-import SearchResultsUsers from "./SearchResultUsers";
+
+import SearchResultsUsersSecond from "./SearchResultUsersSecond";
 
 interface PageProps {
   searchParams: { q: string };
@@ -23,7 +24,7 @@ export default function Page({ searchParams: { q } }: PageProps) {
             Search results for &quot;{q}&quot;
           </h1>
         </div>
-        <SearchResultsUsers query={q} />
+        <SearchResultsUsersSecond query={q} />
         <SearchResultsPosts query={q} />
       </div>
       <TrendsSidebar />

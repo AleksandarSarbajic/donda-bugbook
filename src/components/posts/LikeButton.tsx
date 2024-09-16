@@ -9,6 +9,7 @@ import {
 import kyInstance from "@/lib/ky";
 import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
+import LikesTooltip from "../LikesToolTip";
 
 interface LikeButtonProps {
   postId: string;
@@ -27,6 +28,7 @@ function LikeButton({ postId, initialState }: LikeButtonProps) {
     initialData: initialState,
     staleTime: Infinity,
   });
+
   const { mutate } = useMutation({
     mutationFn: () =>
       data.isLikedByUser
@@ -41,6 +43,7 @@ function LikeButton({ postId, initialState }: LikeButtonProps) {
         likes:
           (previousState?.likes || 0) + (previousState?.isLikedByUser ? -1 : 1),
         isLikedByUser: !previousState?.isLikedByUser,
+        users: previousState?.users,
       }));
       return { previousState };
     },
@@ -53,18 +56,21 @@ function LikeButton({ postId, initialState }: LikeButtonProps) {
       });
     },
   });
+
   return (
-    <button onClick={() => mutate()} className="flex items-center gap-2">
-      <Heart
-        className={cn(
-          "size-5",
-          data.isLikedByUser && "fill-red-500 text-red-500",
-        )}
-      />
-      <span className="text-sm font-medium tabular-nums">
-        {data.likes} <span className="hidden sm:inline">likes</span>
-      </span>
-    </button>
+    <>
+      <button onClick={() => mutate()} className="flex items-center gap-2">
+        <Heart
+          className={cn(
+            "size-5",
+            data.isLikedByUser && "fill-red-500 text-red-500",
+          )}
+        />
+        <span className="text-sm font-medium tabular-nums">
+          {data.likes} <span className="hidden sm:inline">likes</span>
+        </span>
+      </button>
+    </>
   );
 }
 

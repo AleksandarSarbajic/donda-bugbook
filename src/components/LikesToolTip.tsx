@@ -19,7 +19,7 @@ interface UserTooltipProps extends PropsWithChildren {
   user: UserData;
 }
 
-export default function UserTooltip({ children, user }: UserTooltipProps) {
+export default function LikesTooltip({ children, user }: UserTooltipProps) {
   const { user: loggedInUser } = useSession();
 
   const followerState: FollowerInfo = {

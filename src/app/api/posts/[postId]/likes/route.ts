@@ -17,9 +17,7 @@ export async function GET(
       where: { id: postId },
       select: {
         likes: {
-          where: {
-            userId: loggedInUser.id,
-          },
+          where: { userId: loggedInUser.id },
           select: {
             userId: true,
           },
@@ -37,6 +35,7 @@ export async function GET(
     const data: LikeInfo = {
       likes: post._count.likes,
       isLikedByUser: !!post.likes.length,
+      users: post.likes.map((like) => like.userId),
     };
     return Response.json(data);
   } catch (error) {
