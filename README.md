@@ -12,7 +12,11 @@
 <img src="https://img.shields.io/badge/prisma-v6.16.1-white?logo=prisma"/>
 <img src="https://img.shields.io/badge/tailwind-v3.4.1-blue?logo=tailwindcss"/>
 <img src="https://img.shields.io/badge/zod-v3.23.8-white?logo=zod"/>
-<img src="https://img.shields.io/badge/supabase-v2.31.0-green?logo=supabase"/>
+<img src="https://img.shields.io/badge/radixui-v^1.1.1-white?logo=radixui"/>
+<img src="https://img.shields.io/badge/typescript-v5-blue?logo=typescript"/>
+<img src="https://img.shields.io/badge/lucia-v3.2.2-purple?logo=lucia"/>
+<img src="https://img.shields.io/badge/reactquery-v5.50.1-red?logo=reactquery"/>
+<img src="https://img.shields.io/badge/datefns-v3.6.0-pink?logo=datefns"/>
 </div>  
 
 
