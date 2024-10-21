@@ -1,5 +1,5 @@
 <div align="center">
- <img  src="https://github.com/user-attachments/assets/907f8ec6-41c2-4f13-a3bd-243fb32f4831"/>
+ <h1 style="color:blue;">Bug Book</h1>
  </div>
 
 
@@ -20,13 +20,13 @@
 </div>  
 
 
-<p align="center">The Wild Oasis app enables you to check in/out bookings and gain a complete understanding of bookings, sales, check-ins, occupancy rates.</p>
+<p align="center">The Bug Book is a fullstack NextJS social media application. This application is for people who want to meet new people and share their life.</p>
 
 <div align="center">
   
 <a href="#quicstart" >Quickstart</a> • <a href="#technologies-used" align="center">Technologies Used</a> •  <a href="#screenshot" align="center"> Screenshot </a> • <a href="#you-may-also-like" align="center"> •  <a href="#how-it-works" align="center"> How it works </a> • <a align="center" href="you-may-also-like"> You may also like  </a> •  <a href="#license" align="center"> License  </a> 
 
-•<a href="https://the-wild-oasis-web-black.vercel.app/cabins" align="Center">Live Server</a>
+•<a href="https://donda-sma.vercel.app" align="Center">Live Server</a>
 
 </div>
 
@@ -43,7 +43,7 @@
 
 ## Screenshot
 
-![dashboard](https://github.com/user-attachments/assets/cfbe72b1-5a8a-46a7-94da-bc4aa4e84ce9)
+![TheBugBook-login-dark](https://github.com/user-attachments/assets/330630c6-401e-4c3b-9647-f459a0ae3591)
 
 ## Quicstart
 
@@ -51,10 +51,10 @@ To clone and run this application, you'll need [Git](https://git-scm.com/) and [
 
 ```
 # Clone this repository 
-$ git clone https://github.com/AleksandarSarbajic/the-wild-oasis-web
+$ git clone https://github.com/AleksandarSarbajic/donda-bugbook
 
 # Go into the repository
-$ cd the-wild-oasis
+$ cd donda-bugbook
 
 # Install dependencies
 $ npm install
@@ -72,14 +72,15 @@ $ npm run start
 ### Cabins page
 
 On cabins page you can see every single one of cabins with price, image, price and for how many guests it is. You can filter them with number of guests deppending what you need.
-![checkingBooking](https://github.com/user-attachments/assets/dd8c30ed-3b7e-43d2-8773-8b3b9140283f)
+
+![TheBugBook-dark](https://github.com/user-attachments/assets/6c447277-cd8b-4451-9998-877145847a83)
 
 
 ### About Page
 
 On about page you can see description of our brand with images.
 
-![Screenshot 2023-10-02 220009](https://github.com/user-attachments/assets/9d511b67-2ab8-45dc-b370-8dbf97267a9f)
+![TheBugBook-users-dark](https://github.com/user-attachments/assets/980c34d3-bbc4-43ce-8ee5-f6e5ff52a2f3)
 
 ### Cabin Page
 
@@ -87,27 +88,25 @@ When we open a single cabin we can see description, the location and maximum num
 
 If you want to reserve a stay you must be logged in. You can select minimum 5 nigts, select the number of the guests add breakfast, and description.
 
-![Screenshot 2023-10-02 220025](https://github.com/user-attachments/assets/d7be3846-b2c0-4721-8ee7-0411912d009f)
+![TheBugBook-messages-dark](https://github.com/user-attachments/assets/0773c18b-d71d-47c8-b84b-14d7a212d582)
 
 ### Guest area home
 
 On home page it shows unpaid upcoming reservations and by clicking on the "pay now" button you will be redirected to stripe check out.
 
-![Screenshot 2023-09-30 164953](https://github.com/user-attachments/assets/96bc9e63-07c4-4d56-aa0e-0f8f27e12578)
+![TheBugBook-notifications-dark](https://github.com/user-attachments/assets/d2313c03-9061-4b10-bdb1-95c25b94312d)
 
 ### Guest area reservations
 
 Here you can see all your reservations with multiple filters and you can edit or delete a reservation and it will show you all the details about reservation.
 
-
-![Screenshot 2023-10-02 220122](https://github.com/user-attachments/assets/fb965288-a45b-4bf0-929f-7f0fb350ef85)
+![TheBugBook-bookmarks-dark](https://github.com/user-attachments/assets/f94f09a1-8953-476f-9df2-1db9bfed567e)
 
 ### Check out
 
 Check out page is stripe hosted check out that was implemented you get all the details you can pay in your local currency and use a lot of methods to pay the reservation.
 
-
-![Screenshot 2023-10-02 121822](https://github.com/user-attachments/assets/7e7236cc-051b-4404-be0a-68a01bb91132)
+![TheBugBook-search-dark](https://github.com/user-attachments/assets/8a6a1b41-377f-4fce-807b-3904d41788cf)
 
 ### Guest profile
 
